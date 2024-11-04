@@ -93,7 +93,7 @@ they are influencing each others for feature selection.
 
 ### Producer Price Index Data:
 
-![Commodity Plot](https://github.com/EddieNguyen2012/cs163/blob/af3f09d945a33c3db3351765d39696d417104589/src/Plots/Commodity PPI.png)
+![Commodity Plot](https://github.com/EddieNguyen2012/cs163/blob/630b0b5830255150cb4cf7f70703aac2b080468f/src/Plots/Commodity_PPI.png)
 
 - The PPI data was collected among 6 sectors: 
   - Frozen food manufacturing
@@ -109,7 +109,7 @@ techniques later on.
 
 ### USDA RPI Data:
 
-![Commodity RPI.png](https://github.com/EddieNguyen2012/cs163/blob/af3f09d945a33c3db3351765d39696d417104589/src/Plots/Commodity RPI.png)
+![Commodity RPI.png](https://github.com/EddieNguyen2012/cs163/blob/630b0b5830255150cb4cf7f70703aac2b080468f/src/Plots/Commodity_RPI.png)
 
 - The data contains Price Received Index of 8 different commodities: aquaculture, livestock, poultry, dairy, field crops, fruit
 & nuts, horticulture, and vegetables. We need to perform imputation on the aquaculture and horticulture indices as they are
@@ -167,8 +167,9 @@ The following sections should be used for the analysis outcome presentation. The
 ## Imputation for FOOD FISH and HORTICULTURE RPI data
 - After the imputation, although the distribution of both features remained similar, the data range shifted significantly
 
-![KNN_Imputed_boxplot_for_FOOD FISH.png](https://github.com/EddieNguyen2012/cs163/blob/af3f09d945a33c3db3351765d39696d417104589/src/Plots/KNN_Imputed_boxplot_for_FOOD_FISH.png)
-![KNN_Imputed_boxplot_for_HORTICULTURE TOTALS.png](https://github.com/EddieNguyen2012/cs163/blob/af3f09d945a33c3db3351765d39696d417104589/src/Plots/KNN_Imputed_boxplot_for_HORTICULTURE_TOTALS.png)
+![KNN_Imputed_boxplot_for_FOOD FISH.png](https://github.com/EddieNguyen2012/cs163/blob/630b0b5830255150cb4cf7f70703aac2b080468f/src/Plots/KNN_Imputed_boxplot_for_FOOD_FISH.png)
+
+![KNN_Imputed_boxplot_for_HORTICULTURE TOTALS.png](https://github.com/EddieNguyen2012/cs163/blob/630b0b5830255150cb4cf7f70703aac2b080468f/src/Plots/KNN_Imputed_boxplot_for_HORTICULTURE_TOTALS.png)
 
 There are more outliers appear in the high value range. But, when we compare the imputed values to 
 other RPI using the timeseries line plots, they follow the shift of other RPI closely.
@@ -190,19 +191,19 @@ test out. The result shows that at degree 1, CPI data is already station with p-
 
 To test the seasonality of CPI, I performed SLT Decomposition (Seasonal and Trend decomposition using Loess).
 
-![Seasonality_decomposition.png](https://github.com/EddieNguyen2012/cs163/blob/af3f09d945a33c3db3351765d39696d417104589/src/Plots/Seasonality_decomposition.png)
+![Seasonality_decomposition.png](https://github.com/EddieNguyen2012/cs163/blob/630b0b5830255150cb4cf7f70703aac2b080468f/src/Plots/Seasonality_decomposition.png)
 
 The decomposition shows that there is a trend in the CPI data and also seasonality by month. When double check it using the plot of true CPI value 
 versus trend + seasonal data from the decomposition, the result is very promising.
 
-![SLT_prediction.png](https://github.com/EddieNguyen2012/cs163/blob/af3f09d945a33c3db3351765d39696d417104589/src/Plots/SLT_prediction.png)
+![SLT_prediction.png](https://github.com/EddieNguyen2012/cs163/blob/630b0b5830255150cb4cf7f70703aac2b080468f/src/Plots/SLT_prediction.png)
 
 The line can capture the general trend of the change of CPI. For extra information, I performed anamoly detection to identify the irregular changes of
 CPI data in the dataset. 
 
-![Anamolies_detection.png](https://github.com/EddieNguyen2012/cs163/blob/af3f09d945a33c3db3351765d39696d417104589/src/Plots/Anamolies_detection.png)
+![Anamolies_detection.png](https://github.com/EddieNguyen2012/cs163/blob/630b0b5830255150cb4cf7f70703aac2b080468f/src/Plots/Anamolies_detection.png)
 
-![Anamolies_points.png](https://github.com/EddieNguyen2012/cs163/blob/af3f09d945a33c3db3351765d39696d417104589/src/Plots/Anamolies_points.png)
+![Anamolies_points.png](https://github.com/EddieNguyen2012/cs163/blob/630b0b5830255150cb4cf7f70703aac2b080468f/src/Plots/Anamolies_points.png)
 
 The threshold that I used to classify anamolies is:
 ```
@@ -234,9 +235,9 @@ As our data is monthly, we will use ``S=12``. Moreover, we use ``d=1`` as a resu
 
 ### AR lag order and MA lag order
 
-![ACF.png](https://github.com/EddieNguyen2012/cs163/blob/af3f09d945a33c3db3351765d39696d417104589/src/Plots/ACF.png)
+![ACF.png](https://github.com/EddieNguyen2012/cs163/blob/630b0b5830255150cb4cf7f70703aac2b080468f/src/Plots/ACF.png)
 
-![PACF.png](https://github.com/EddieNguyen2012/cs163/blob/af3f09d945a33c3db3351765d39696d417104589/src/Plots/PACF.png)
+![PACF.png](https://github.com/EddieNguyen2012/cs163/blob/630b0b5830255150cb4cf7f70703aac2b080468f/src/Plots/PACF.png)
 
 To identify p and q, I used ACF and PACF plots on CPI data with 1 level of differencing:
 
@@ -247,7 +248,7 @@ are multiplication of 9. This indicate that there is a seasonality correlation e
 - For ``P`` and ``Q``, we will use grid search strategy to test out for the model with the best metrics (AIC, BIC, Ljung-Box p-value). The best model is 
 **SARIMAX(1,1,3)(0,1,1)[9]** with
 
-![sarimax_results.png](https://github.com/EddieNguyen2012/cs163/blob/af3f09d945a33c3db3351765d39696d417104589/src/Plots/sarimax_results.png)
+![sarimax_results.png](https://github.com/EddieNguyen2012/cs163/blob/630b0b5830255150cb4cf7f70703aac2b080468f/src/Plots/sarimax_results.png)
 
 Some key results that we can tell from this model:
 
@@ -258,19 +259,19 @@ Some key results that we can tell from this model:
   - **Jarque-Bera Test (JB)**: A high value (68.12) with a very low probability (0.00) indicates that the residuals are not normally distributed, which may need further examination.
   - **Heteroskedasticity Test**: The H statistic (1.71) with a significant probability (0.02) suggests that there may be some level of heteroskedasticity in the model.
 
-![SARIMAX_diagnosis.png](https://github.com/EddieNguyen2012/cs163/blob/af3f09d945a33c3db3351765d39696d417104589/src/Plots/SARIMAX_diagnosis.png)
+![SARIMAX_diagnosis.png](https://github.com/EddieNguyen2012/cs163/blob/630b0b5830255150cb4cf7f70703aac2b080468f/src/Plots/SARIMAX_diagnosis.png)
 
 Since the data is relatively small, I retest the normality of the predicted CPI with Shapiro-Wilks test. However, the p-value received is way less than 0.05.
 So, there is normality issue with the model. 
 
-![QQ_plot_of_CPI.png](https://github.com/EddieNguyen2012/cs163/blob/af3f09d945a33c3db3351765d39696d417104589/src/Plots/QQ_plot_of_CPI.png)
+![QQ_plot_of_CPI.png](https://github.com/EddieNguyen2012/cs163/blob/630b0b5830255150cb4cf7f70703aac2b080468f/src/Plots/QQ_plot_of_CPI.png)
 
 The plot shows a non-normal distribution of CPI. This is why the normality of the model is violated. So, I need to try new methods 
 to transform the data to be normalized before retest the data. However, the current SARIMAX already yields very good prediction
 
-![SARIMAX_prediction.png](https://github.com/EddieNguyen2012/cs163/blob/af3f09d945a33c3db3351765d39696d417104589/src/Plots/SARIMAX_prediction.png)
+![SARIMAX_prediction.png](https://github.com/EddieNguyen2012/cs163/blob/630b0b5830255150cb4cf7f70703aac2b080468f/src/Plots/SARIMAX_prediction.png)
 
-![SARIMAX_prediction_whole_data.png](https://github.com/EddieNguyen2012/cs163/blob/af3f09d945a33c3db3351765d39696d417104589/src/Plots/SARIMAX_prediction_whole_data.png)
+![SARIMAX_prediction_whole_data.png](https://github.com/EddieNguyen2012/cs163/blob/630b0b5830255150cb4cf7f70703aac2b080468f/src/Plots/SARIMAX_prediction_whole_data.png)
 
 ### XGBoost Approach
 
@@ -278,12 +279,12 @@ For XGBoost, I used TimeSeriesSplit() to create time-splitting-based cross-valid
 the small sample size. I also tested other values but 10 gives the best performance in term of MSE and MAE.
 So far, I used GridSearchCV to tune the model and the best model performance is as follows
 
-![MSE_and_MAE_of_best_XGBoost_model.png](https://github.com/EddieNguyen2012/cs163/blob/af3f09d945a33c3db3351765d39696d417104589/src/Plots/MSE_and_MAE_of_best_XGBoost_model.png)
+![MSE_and_MAE_of_best_XGBoost_model.png](https://github.com/EddieNguyen2012/cs163/blob/630b0b5830255150cb4cf7f70703aac2b080468f/src/Plots/MSE_and_MAE_of_best_XGBoost_model.png)
 
 As we can see, the MSE and MAE learning curve does not have a stable trend as expected. Moreover, MSE and MAE on test set is
 very high, which suggest that the model did not capture any trend at all.
 
-![XG_Boost_prediction.png](https://github.com/EddieNguyen2012/cs163/blob/af3f09d945a33c3db3351765d39696d417104589/src/Plots/XG_Boost_prediction.png)
+![XG_Boost_prediction.png](https://github.com/EddieNguyen2012/cs163/blob/630b0b5830255150cb4cf7f70703aac2b080468f/src/Plots/XG_Boost_prediction.png)
 
 Since XGBoost does not require standardization, it means that the non-normality of CPI is not a factor contributes to the 
 worst performance. Hence, I will try to create Window data of features as well as looking for new way to expand the dataset
@@ -291,7 +292,7 @@ to enhance the performance of the model.
 
 ### Feature ranking
 
-![SHAP_plot.png](https://github.com/EddieNguyen2012/cs163/blob/af3f09d945a33c3db3351765d39696d417104589/src/Plots/SHAP_plot.png)
+![SHAP_plot.png](https://github.com/EddieNguyen2012/cs163/blob/630b0b5830255150cb4cf7f70703aac2b080468f/src/Plots/SHAP_plot.png)
 
 So far, the PPI indices are the ones that contribute the most to the XGBoost model using SHAPley values. However,
 we cannot tell if this is true yet since the XGBoost model is not working properly. I will conduct this test again
@@ -300,7 +301,7 @@ after XGBoost has been finalized.
 However, the huge impact of PPI on CPI is indeed a true fact based on the SARIMAX coefficients. Also based on these coefficient,
 they have negative impact on the CPI value.
 
-![Corr_heatmap.png](https://github.com/EddieNguyen2012/cs163/blob/af3f09d945a33c3db3351765d39696d417104589/src/Plots/Corr_heatmap.png)
+![Corr_heatmap.png](https://github.com/EddieNguyen2012/cs163/blob/630b0b5830255150cb4cf7f70703aac2b080468f/src/Plots/Corr_heatmap.png)
 
 Using pairwise correlation, we can also spot the impact clearer with PPI indices impact CPI more than RPI and CE indices. So,
 I expect the completed SHAPley values will also yield similar result.
