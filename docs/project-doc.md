@@ -292,7 +292,7 @@ to enhance the performance of the model.
 
 ### Feature ranking
 
-![SHAP_plot.png](https://github.com/EddieNguyen2012/cs163/blob/630b0b5830255150cb4cf7f70703aac2b080468f/src/Plots/SHAP_plot.png)
+![SHAP_plot.png](https://github.com/EddieNguyen2012/cs163/blob/84fdb7de07b723313791cec8156ebd67df0fb1ca/src/Plots/SHAP_plot.png)
 
 So far, the PPI indices are the ones that contribute the most to the XGBoost model using SHAPley values. However,
 we cannot tell if this is true yet since the XGBoost model is not working properly. I will conduct this test again
@@ -301,7 +301,7 @@ after XGBoost has been finalized.
 However, the huge impact of PPI on CPI is indeed a true fact based on the SARIMAX coefficients. Also based on these coefficient,
 they have negative impact on the CPI value.
 
-![Corr_heatmap.png](https://github.com/EddieNguyen2012/cs163/blob/630b0b5830255150cb4cf7f70703aac2b080468f/src/Plots/Corr_heatmap.png)
+![Corr_heatmap.png](https://github.com/EddieNguyen2012/cs163/blob/84fdb7de07b723313791cec8156ebd67df0fb1ca/src/Plots/Corr_heatmap.png)
 
 Using pairwise correlation, we can also spot the impact clearer with PPI indices impact CPI more than RPI and CE indices. So,
 I expect the completed SHAPley values will also yield similar result.
