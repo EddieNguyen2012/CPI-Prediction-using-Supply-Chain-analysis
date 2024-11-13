@@ -306,17 +306,60 @@ they have negative impact on the CPI value.
 Using pairwise correlation, we can also spot the impact clearer with PPI indices impact CPI more than RPI and CE indices. So,
 I expect the completed SHAPley values will also yield similar result.
 
-## Data Visualization Plan 
-<!--- 
-----------
-The following sections should be used for the visualization planning. These are not required for the analysis outcome presentation.
-----------
--->
-
+## Data Visualization Plan
 
 # Visualization
 ## Visualization Plan
-<!--- List and explain what types of plots you plan to provide and what you are trying to show through the diagrams. You should explore the best way to visualize the information and message based on the lectures on visualization and related topics. It is required to have at least two interactive graphing and five static plots. -->
+<!--- List and explain what types of plots you plan to provide and what you are trying to show through the diagrams. 
+You should explore the best way to visualize the information and message based on the lectures on visualization and 
+related topics. It is required to have at least two interactive graphing and five static plots. -->
+
+### Descriptive Analysis
+
+For this part, I want to make it a little interesting by mapping the time with US presidency periods.
+
+- Firstly, I will have a diagram that show the supply chain and the index corresponding to each point in it.
+
+- I will make 5 individual timeseries Line Plots on the same row (4 columns) to show how each index, and utility price (in general) 
+changed throughout the time period. Then, below them will be a big CPI timeseries Line Plot. This is to show how different or similar each index 
+progressed comparing to others. I will also include a switch (maybe list box or radio button) to show the plots in different time periods (I plan
+to use 4 years and map with president name)
+
+- For each index group, I will include Pie Chart or Bar chart to show the ranking of effect (weight) that each commodity change has on the 
+general CPI change. (i.e.: for RPI commodities, rank how is the change of each commodity affect the change of the CPI index to show
+how important it is. In the other words, rank the weight of each commodity). This graph has a button or list box so that user
+can switch between index groups.
+
+- For gas price and electricity price, I will use histogram to show what is the common price throughout the timespan as well as the 
+line plot to show the trend of them. 
+
+- Finally, I will use line plot to show differentiated CPI to show the seasonality of CPI change and point out the unusual peak point (anamolies).
+I can also make annotation to highlight the presidency period
+
+### Forcasting Analysis
+
+- I will show a line plot of prediction of XGBoost and SARIMAX (maybe LSTM) versus the real value. The prediction will be throughout the available dataset
+and I will highlight (change the background color) where is the training data and where is the prediction data.
+
+- Then, I will include the SHAP beeswarm to show the which feature affect the outcome of the XGBoost model. 
+
+- If possible, I will also include input boxes where user can input indices values and see how the model will predict it.
+  (this includes deploying the models, so I need to take time working on it)
+
+### Methodology
+
+I will show all the mathematical plots and test results that I conducted to back up the claim and visualizations in a page
 
 ## Web Page Plan
-<!--- Explain how many pages you will have in total and what content will be shown in each page. (Each diagram discussed above should be given a proper location in this section. Also, it is required to have (1) "Project Objective" page, which explains the main goals and data sources, and (2) "Analytical Methods" page, where you explain the major techniques used in the project and provide further references. -->
+<!--- Explain how many pages you will have in total and what content will be shown in each page. (Each diagram
+discussed above should be given a proper location in this section. Also, it is required to have (1)
+"Project Objective" page, which explains the main goals and data sources, and (2) "Analytical Methods" page,
+where you explain the major techniques used in the project and provide further references. -->
+
+As of right now, I will have 4 pages:
+
+- Project Landing page: I will display the descriptive analysis plots here as well as some introduction to the project.
+- Proposal page (Project Objective): Everything in this markdown file (beside the results) will be displayed in this page. I will also find the 
+references and put them here.
+- Forecasting result: I will put the forecasting analysis result over here together and some link to the methodology page
+- Methodology (Analytical Methods): As proposed above, I will put all the mathematical results here to demonstrate how I conducted all the analysis.
