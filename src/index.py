@@ -9,8 +9,8 @@ import pandas as pd
 application = app.server
 app.config.suppress_callback_exceptions = True
 
-original_data = pd.read_csv('Data/final.csv')
-ml_prediction = pd.read_csv('Data/ML_Prediction.csv')
+original_data = pd.read_csv('~/cs163/src/Data/final.csv')
+ml_prediction = pd.read_csv('~/cs163/src/Data/ML_Prediction.csv')
 app.layout = html.Div([
     dcc.Location(id='url', refresh=False),
     html.Div(id='page-content'),

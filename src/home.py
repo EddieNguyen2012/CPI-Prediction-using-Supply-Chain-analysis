@@ -6,9 +6,9 @@ from Nav_bar import create_navbar
 from app4 import app
 
 # Load data
-ml_prediction = pd.read_csv('Data/ML_Prediction.csv', parse_dates=['DATE'], index_col=['DATE'])
-ml_prediction['CPI Diff'] = pd.read_csv('Data/Diff_CPI.csv', parse_dates=['DATE'], index_col=['DATE'])
-other_indices = pd.read_csv('Data/mean_only_data.csv', parse_dates=['DATE'], index_col=['DATE'])
+ml_prediction = pd.read_csv('~/cs163/src/Data/ML_Prediction.csv', parse_dates=['DATE'], index_col=['DATE'])
+ml_prediction['CPI Diff'] = pd.read_csv('~/cs163/src/Data/Diff_CPI.csv', parse_dates=['DATE'], index_col=['DATE'])
+other_indices = pd.read_csv('~/cs163/src/Data/mean_only_data.csv', parse_dates=['DATE'], index_col=['DATE'])
 main_plot_width = 1200
 main_plot_height = 600
 # fig = px.line(ml_prediction.loc['2023-01-01':], title="CPI Prediction Over Time", labels={'x': 'Timespan', 'y': 'CPI'})
@@ -21,7 +21,7 @@ def update_background(fig, color):
         plot_bgcolor='#f7f7e6',
         xaxis=dict(showgrid=False, gridcolor='#38499E'),  # Change gridline color
         yaxis=dict(showgrid=False, gridcolor='#38499E'),
-        font=dict(family='Poppins', weight='normal', color=color),
+        font=dict(family='Poppins', color=color),
         title_x=0.5,
         showlegend=False
     )
