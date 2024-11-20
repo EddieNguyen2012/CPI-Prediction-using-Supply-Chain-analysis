@@ -11,10 +11,8 @@ ml_prediction['CPI Diff'] = pd.read_csv('~/cs163/src/Data/Diff_CPI.csv', parse_d
 other_indices = pd.read_csv('~/cs163/src/Data/mean_only_data.csv', parse_dates=['DATE'], index_col=['DATE'])
 main_plot_width = 1200
 main_plot_height = 600
-# fig = px.line(ml_prediction.loc['2023-01-01':], title="CPI Prediction Over Time", labels={'x': 'Timespan', 'y': 'CPI'})
-#
-# fig.update_xaxes(rangeslider_visible=True)
 
+# Single plots
 def update_background(fig, color):
     fig.update_layout(
         paper_bgcolor='#f7f7e6',
@@ -26,30 +24,78 @@ def update_background(fig, color):
         showlegend=False
     )
 
-energy_plots = []
-energy_plots.append(px.histogram(
-    other_indices['Gas Price'],
-    title='Common Gas Price',
-    labels={'value': 'Price ($/gallon)', 'count': 'Frequency'},
-    nbins=10,
-))
-energy_plots.append(px.histogram(
-    other_indices['Electricity Price'],
-    title='Common Electricity Price',
-    labels={'value': 'Price (cents/kWh)', 'count': 'Frequency'},
-    nbins=10
-))
+def update_background_with_grid(fig, color):
+    fig.update_layout(
+        paper_bgcolor='#f7f7e6',
+        plot_bgcolor='#f7f7e6',
+        xaxis=dict(showgrid=False, gridcolor=color),  # Change gridline color
+        yaxis=dict(showgrid=True, gridcolor=color),
+        font=dict(family='Poppins', color=color),
+        title_x=0.5,
+        showlegend=False
+    )
 
-for i in range(len(energy_plots)):
-    update_background(energy_plots[i], '#38499E')
+# Electricity histogram plot
+elec_plot = go.Figure()
+elec_plot.add_trace(
+    go.Histogram(
+        x=other_indices['Electricity Price'],
+        name='count',
+        xbins=dict(size=0.5),
+        marker=dict(color='#38499E')
+    )
+)
+elec_plot.update_layout(
+        title=dict(
+            text='Electricity Price frequency'
+        ),
+        xaxis=dict(
+            title=dict(
+                text='Electricity Price (cents/kWh)'
+            )
+        ),
+        yaxis=dict(
+            title=dict(
+                text='Frequency'
+            )
+        ),
+    )
 
+# Gas histogram plot
 
+gas_plot = go.Figure()
+gas_plot.add_trace(
+    go.Histogram(
+        x=other_indices['Gas Price'],
+        name='count',
+        xbins=dict(size=0.5),
+        marker=dict(color='#E84324')
+    )
+)
+gas_plot.update_layout(
+        title=dict(
+            text='Gas Price frequency'
+        ),
+        xaxis=dict(
+            title=dict(
+                text='Gas Price ($/gallon)'
+            )
+        ),
+        yaxis=dict(
+            title=dict(
+                text='Frequency'
+            )
+        ),
+    )
 
+update_background_with_grid(gas_plot, '#E84324')
+update_background_with_grid(elec_plot, '#38499E')
 
 
 # Navigation bar
 nav = create_navbar('', '#38499E', '#f7f7e6')
 
+# Body content
 body = html.Div([
     html.Img(
         src='assets/images/General Election Day Instagram Story.svg',
@@ -178,16 +224,16 @@ body = html.Div([
         className='first-plots'
     ),
     html.Div([
-        "What are the 'normal' prices for gas and electricity?",
+        "What are the 'usual' prices for gas and electricity?",
         html.Div(
             [
                 dcc.Graph(
                     id='hist-gas',
-                    figure=energy_plots[0]
+                    figure=gas_plot
                 ),
                 dcc.Graph(
                     id='hist-elec',
-                    figure=energy_plots[1]
+                    figure=elec_plot
                 )
             ],
             className='energy-hist-flex-box'
@@ -209,13 +255,20 @@ body = html.Div([
     'margin': '0 auto'
 })
 
+footer = html.Div(
+    className='footer',
+    children=[
+        'You reached footer'
+    ],
+
+)
 
 # Page layout function
 def create_page_home():
     layout = html.Div([
         nav,
-        body
-
+        body,
+        footer
     ])
     return layout
 
@@ -256,7 +309,7 @@ def display_CPI(president):
         line=dict(color=color)
     ))
     fig.update_layout(
-        width=main_plot_width/2,
+        width=main_plot_width/1.75,
         height=main_plot_height/1.5,
         title=dict(
             text='CPI under President ' + president
@@ -294,7 +347,7 @@ def display_d_CPI(president):
         line=dict(color=color)
     ))
     fig.update_layout(
-        width=main_plot_width/2,
+        width=main_plot_width/1.75,
         height=main_plot_height/1.5,
         title=dict(
             text='CPI monthly change under President ' + president
@@ -333,7 +386,7 @@ def display_PPI(president):
 
     ))
     fig.update_layout(
-        width=main_plot_width / 3,
+        width=main_plot_width / 2.5,
         height=main_plot_height / 1.5,
         title=dict(
             text='PPI under President ' + president
@@ -373,7 +426,7 @@ def display_RPI(president):
 
     ))
     fig.update_layout(
-        width=main_plot_width / 3,
+        width=main_plot_width / 2.5,
         height=main_plot_height / 1.5,
         title=dict(
             text='RPI under President ' + president
@@ -413,7 +466,7 @@ def display_CE(president):
 
     ))
     fig.update_layout(
-        width=main_plot_width / 3,
+        width=main_plot_width / 2.5,
         height=main_plot_height / 1.5,
         title=dict(
             text='CE under President ' + president
@@ -453,7 +506,7 @@ def display_gas(president):
 
     ))
     fig.update_layout(
-        width=main_plot_width / 3,
+        width=main_plot_width /2.5,
         height=main_plot_height / 1.5,
         title=dict(
             text='Gas Price under President ' + president
@@ -493,7 +546,7 @@ def display_gas(president):
 
     ))
     fig.update_layout(
-        width=main_plot_width / 3,
+        width=main_plot_width / 2.5,
         height=main_plot_height / 1.5,
         title=dict(
             text='Electricity Price under President ' + president
