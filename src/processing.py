@@ -428,19 +428,19 @@ body = html.Div(
             html.Br(),
             html.Br(),
             """
-            - **Ljung-Box Test (Q)**: The result (0.39) and its probability (0.59) indicate that there is low significant 
+            - Ljung-Box Test (Q): The result (0.39) and its probability (0.59) indicate that there is low significant 
             autocorrelation in the residuals at lag 1, suggesting the model is well-fitted.
             """,
             html.Br(),
             html.Br(),
             """
-            - **Jarque-Bera Test (JB)**: A high value (61.94) with a very low probability (0.00) indicates that the 
+            - Jarque-Bera Test (JB): A high value (61.94) with a very low probability (0.00) indicates that the 
             residuals are not normally distributed, which may need further examination.
             """,
             html.Br(),
             html.Br(),
             """
-            - **Heteroskedasticity Test**: The H statistic (1.42) with a significant probability (0.14) suggests that 
+            - Heteroskedasticity Test: The H statistic (1.42) with a significant probability (0.14) suggests that 
             there may be some level of heteroskedasticity in the model.
             """,
             html.Br(),
@@ -552,6 +552,7 @@ body = html.Div(
             """
         ]),
         html.H2(className='subheading-1-red', children='Feature Importance'),
+        html.H3(className='subheading-2-red', children='SHAPley Values'),
         html.Div(className='paragraph-red', children=[
             """
             So far, the PPI indices are the ones that contribute the most to the XGBoost model using SHAPley 
@@ -571,6 +572,26 @@ body = html.Div(
             conclude that RPI and PPI values are significant to the CPI changes.
             """,
 
+        ]),
+        html.H3(className='subheading-2-red', children='Granger Causal Analysis on PPI sectors'),
+        html.Div(className='paragraph-red', children=[
+            """
+            Since our data is time series, to measure the effect or correlation, we must perform causal-impact analysis.
+            For this analysis, we will consider using Granger Causality Test. Note that the traditional GC test only works
+            on a pair of variables. We will incorporate Vector AutoRegressive model here to make multi-variate comparisons.
+            """,
+            html.Div(className='image-group', children=[
+                html.Img(className='image', src='assets/Plots/PPI_Granger_Causal_Ranking.png',
+                         alt='GC plot',
+                         style={'width': '70%'}),
+                html.Div(className='image-description-red',
+                         children='Figure 4.2: Ranking of effect of PPI sectors on CPI using VAR model'),
+
+            ]),
+            """
+            With all p-values under 0.05, the granger causality between all PPI sectors and CPI are significant. Based on
+            the pie chart, Snack Food Manufacturer PPI influences the CPI changes the most.
+            """
         ]),
         html.H2(className='subheading-1-red', children='Conclusion'),
         html.Div(className='paragraph-red', children=[

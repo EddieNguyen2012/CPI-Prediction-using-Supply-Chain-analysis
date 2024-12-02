@@ -54,9 +54,13 @@ body = html.Div(
                  ),
         html.H3(className='subheading-2', children="US Energy Information Administration"),
         html.Div(className='paragraph', children=
-        """
-            Fill here N/A
-            """
+        """The U.S. Energy Information Administration (EIA) collects gas and electricity data through surveys, 
+        mandatory industry reporting, and administrative sources. Surveys, such as Form EIA-923 for electric power 
+        and EIA-176 for natural gas, gather detailed data from producers, distributors, and consumers. Energy 
+        companies are required to report production, consumption, and pricing information directly to the EIA. 
+        Additionally, the EIA obtains administrative data from federal and state agencies like the Federal Energy 
+        Regulatory Commission (FERC) and state utility commissions. These methods ensure comprehensive and accurate 
+        insights into energy markets."""
                  ),
         html.H2(className='subheading-1', children="Expected Major Findings"),
         html.H3(className='subheading-2', children='1. CPI Forecasting model'),
@@ -70,10 +74,10 @@ body = html.Div(
             substitution behavior (CCPI) to predict the inflation (CPI)."""
                  ),
         html.H3(className='subheading-2',
-                children='2. Which USDA sectors (e.g., LIVESTOCK, HORTICULTURE, VEGETABLES) have the largest impact on CPI?'),
+                children='2. Which PPI sectors have the largest impact on CPI?'),
         html.Div(className='paragraph', children=
-        """By analyzing price trends across different agricultural sectors, we aim to 
-            determine which commodities contribute most to fluctuations in consumer prices. 
+        """By analyzing price trends across different manufacturing sectors, we aim to 
+            determine which sector contribute most to fluctuations in consumer prices. 
             This insight can help policymakers and businesses understand the drivers of 
             inflation in food markets and anticipate changes in consumer spending patterns. 
             The analysis will also aid in developing predictive models for better forecasting 
@@ -127,7 +131,8 @@ body = html.Div(
             """
                  ),
         html.H2(className='subheading-1', children='Data Analysis and Algorithms'),
-        html.H3(className='subheading-2', children='Imputation for Food Fish and Horticulture RPI: Due to the similarity in general RPI change over commodities'),
+        html.H3(className='subheading-2',
+                children='Imputation for Food Fish and Horticulture RPI: Due to the similarity in general RPI change over commodities'),
         html.Div(className='paragraph', children=
         """
         I suspect KNN Imputer can be utilized to fill the those missing value. I will implement the KNN Imputer using Scikit_learn,
@@ -142,12 +147,12 @@ body = html.Div(
         for our predictors. Else, we have to investigate closely using pairwise comparison to figure out the left-out 
         needed features. 
         """),
-        html.H3(className='subheading-2', children='Ranking the commodities on their effect to CPI'),
+        html.H3(className='subheading-2', children='Ranking the PPI sectors on their effect to CPI'),
         html.Div(className='paragraph', children=
         """
-        For this analysis, we can use multiple regression analysis to check the 
-        correlation of the commodities RPI on CPI. We will use the coefficients to rank the importance of the commodity's effect on CPI. Moreover,
-        we can also do the same analysis on PPI sectors.
+        For this analysis, we can use Granger Causal test to check the 
+        correlation of the sectors of PPI on CPI. We will use the test statistics to rank the importance of the sector's
+        effect on CPI.
         """),
         html.H3(className='subheading-2', children='Feature importance'),
         html.Div(className='paragraph', children=
@@ -163,11 +168,10 @@ body = html.Div(
         """),
         html.H3(className='subheading-2', children='Lag and Correlation Computation of CPI for ARIMA model fitting'),
         html.Div(className='paragraph', children=
-        """
-        From the plot above, we can see that CPI does not have seasonality. However, it does not 
-        have stationary. So, we will use differenced values of CPI to fit in the ARIMA model. In the preparation part, we will calculate correlation and
-        use ACF/PACF plots to determine feature lag. Then we will fit the data into ARIMA and produce predict some short term value for CPI.
-        """),
+        """As an inflation indicator, CPI should not be stationary. So, we will use differenced values of CPI to fit 
+        in the ARIMA model. In the preparation part, we will calculate correlation and use ACF/PACF plots to 
+        determine feature lag. Then we will fit the data into ARIMA and produce predict some short term value for 
+        CPI."""),
         html.H3(className='subheading-2', children='Model comparison'),
         html.Div(className='paragraph', children=
         """
