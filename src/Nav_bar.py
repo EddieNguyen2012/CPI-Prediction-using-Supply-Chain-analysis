@@ -2,8 +2,9 @@ import dash_bootstrap_components as dbc, html
 
 import dash_bootstrap_components as dbc
 from dash import html
-
-def create_navbar(project_name, background_fill = 'dark', text_color = 'white'):
+RED= '#D85840'
+WHITE = '#F7F7E6'
+def create_navbar(project_name, background_fill = WHITE, text_color = RED):
     navbar = dbc.Navbar(
         dbc.Container(
             dbc.Row(
@@ -40,8 +41,9 @@ def create_navbar(project_name, background_fill = 'dark', text_color = 'white'):
                                 dbc.DropdownMenuItem("Home", href="/"),
                                 dbc.DropdownMenuItem(divider=True),
                                 dbc.DropdownMenuItem('Proposals', href="/proposals"),
-                                dbc.DropdownMenuItem('Data Processing', href="/processing")
-                            ], style={'color': text_color}
+                                dbc.DropdownMenuItem('Methodology', href="/methodology"),
+                                dbc.DropdownMenuItem('Predictions', href="/prediction")
+                            ], style={'color': text_color, 'background-color': background_fill}
                         ),
                         width="auto"
                     )

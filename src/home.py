@@ -1,3 +1,4 @@
+import dash
 import pandas as pd
 from dash import html, dcc, Input, Output
 import plotly.express as px
@@ -5,11 +6,18 @@ import plotly.graph_objects as go
 from Nav_bar import create_navbar
 from app4 import app
 
+#instance variable
+
+RED = '#E84324'
+BLUE = '#38499E'
+WHITE = '#f7f7e6'
 # Load data
-ml_prediction = pd.read_csv('~/cs163/src/Data/ML_Prediction.csv', parse_dates=['DATE'], index_col=['DATE'])
-ml_prediction['CPI Diff'] = pd.read_csv('~/cs163/src/Data/Diff_CPI.csv', parse_dates=['DATE'], index_col=['DATE'])
-other_indices = pd.read_csv('~/cs163/src/Data/mean_only_data.csv', parse_dates=['DATE'], index_col=['DATE'])
-main_plot_width = 1200
+ml_prediction = pd.read_csv('Data/ML_Prediction.csv', parse_dates=['DATE'], index_col=['DATE'])
+ml_prediction['CPI Diff'] = pd.read_csv('Data/Diff_CPI.csv', parse_dates=['DATE'], index_col=['DATE'])
+other_indices = pd.read_csv('Data/mean_only_data.csv', parse_dates=['DATE'], index_col=['DATE'])
+
+# func = assign("function() {return window.innerWidth}")
+main_plot_width = 1000
 main_plot_height = 600
 
 # Single plots
@@ -17,8 +25,8 @@ def update_background(fig, color):
     fig.update_layout(
         paper_bgcolor='#f7f7e6',
         plot_bgcolor='#f7f7e6',
-        xaxis=dict(showgrid=False, gridcolor='#38499E'),  # Change gridline color
-        yaxis=dict(showgrid=False, gridcolor='#38499E'),
+        xaxis=dict(showgrid=True, gridcolor='#222C62'),  # Change gridline color
+        yaxis=dict(showgrid=True, gridcolor='#222C62'),
         font=dict(family='Poppins', color=color),
         title_x=0.5,
         showlegend=False
@@ -29,7 +37,7 @@ def update_background_with_grid(fig, color):
         paper_bgcolor='#f7f7e6',
         plot_bgcolor='#f7f7e6',
         xaxis=dict(showgrid=False, gridcolor=color),  # Change gridline color
-        yaxis=dict(showgrid=True, gridcolor=color),
+        yaxis=dict(showgrid=True, gridcolor='#222C62'),
         font=dict(family='Poppins', color=color),
         title_x=0.5,
         showlegend=False
@@ -120,13 +128,14 @@ body = html.Div([
         src='assets/images/Supply Chain Diagram.png',
         alt='Supply Chain Diagram',
         style={
-            'width': '90%',
-            'height': 'auto',
-            'display': 'block',
+            'width': '70%',
+            'height': '70%',
+            'display': 'bloc',
             'margin-top': '5%',
-            'margin-left': '5%',
-            # 'margin-right': '2%',
-            'margin-bottom': '5%'
+            'margin-right': 'auto',
+            'margin-left': 'auto',
+            'margin-bottom': '5%',
+
         }),
     html.Img(
         src='assets/images/Splitter 2.png',
@@ -142,21 +151,6 @@ body = html.Div([
                  dcc.Graph(
                      id='CPI-plot'
                  ),
-                 dcc.Graph(
-                     id='diff-CPI-plot'
-                 ),
-             ],
-
-             style={
-                 'align-items': 'center',
-                 'display': 'flex',
-                 'flex-direction': 'row',
-                 'justify-content': 'center'
-             }
-         ),
-         html.Div(
-             [
-                 dcc.Graph(id='PPI-plot'),
                  html.Div(
                      [
                          'Under President ',
@@ -191,6 +185,23 @@ body = html.Div([
                      }
                  )
                  ,
+                 dcc.Graph(
+                     id='diff-CPI-plot'
+                 ),
+             ],
+
+             style={
+                 'align-items': 'center',
+                 'display': 'flex',
+                 'flex-direction': 'row',
+                 'justify-content': 'space-between'
+             }
+         ),
+         html.Div(
+             [
+                 dcc.Graph(id='PPI-plot'),
+                 dcc.Graph(id='RPI-plot'),
+
                  dcc.Graph(id='CE-plot')
              ],
              style={
@@ -204,22 +215,21 @@ body = html.Div([
          html.Div(
              [
                  dcc.Graph(id='Gas-plot'),
-                 dcc.Graph(id='Electricity-plot'),
-                 dcc.Graph(id='RPI-plot')
+                 dcc.Graph(id='Electricity-plot')
              ],
              style={
                  'display': 'flex',
                  'flex-direction': 'row',
-                 'justify-content': 'space-between',
+                 'justify-content': 'center',
                  'align-items': 'center',
              }
          )
             ,
          ],
         style={
-
             'font-size': '30px',
-
+            'padding-left': '5%',
+            'padding-right': '5%'
         },
         className='first-plots'
     ),
@@ -236,14 +246,20 @@ body = html.Div([
                     figure=elec_plot
                 )
             ],
-            className='energy-hist-flex-box'
+            className='energy-hist-flex-box',
+            style={
+                'display': 'flex',
+                'align-items': 'center',
+                'justify-content': 'center'
+            }
         ),
     ],
         style={
             'margin-left': '5%',
             'margin-right': '5%',
             'margin-top': '5%',
-            'font-size': '30px'
+            'font-size': '30px',
+
         }
 
     )
@@ -258,15 +274,26 @@ body = html.Div([
 footer = html.Div(
     className='footer',
     children=[
-        'You reached footer'
+        html.Div(
+            className='footer-content-blue',
+            children=[
+                'Manh Tuong Nguyen',
+                html.Br(),
+                'Email: tuong62642@gmail.com',
+                html.Br(),
+                'GitHub: https://github.com/EddieNguyen2012',
+                html.Br(),
+                'LinkedIn: www.linkedin.com/in/manh-tuong-nguyen'
+            ]
+        )
     ],
-
 )
 
 # Page layout function
 def create_page_home():
     layout = html.Div([
         nav,
+        dcc.Store(id='window-width-store', storage_type='session'),
         body,
         footer
     ])
@@ -278,16 +305,16 @@ def get_presidency_and_color(president):
     color = None
     if president == 'Biden':
         time_range = pd.date_range(start='2021-01-01', end='2024-08-01', freq='MS')
-        color = '#E84324'
+        color = BLUE
     elif president == 'Trump':
         time_range = pd.date_range(start='2017-01-01', end='2021-01-01', freq='MS')
-        color = '#38499E'
+        color = RED
     elif president == 'Obama':
         time_range = pd.date_range(start='2009-01-01', end='2017-01-01', freq='MS')
-        color = '#E84324'
+        color = BLUE
     else:
         time_range = pd.date_range(start='2006-10-01', end='2009-01-01', freq='MS')
-        color = '#38499E'
+        color = RED
     return time_range, color
 
 
@@ -297,11 +324,11 @@ def get_presidency_and_color(president):
 )
 def display_CPI(president):
     time_range, color = get_presidency_and_color(president)
-    plot_data = ml_prediction.loc[time_range]
+    plot_data = ml_prediction.loc[time_range]['CPI']
     fig = go.Figure()
 
     fig.add_trace(go.Scatter(
-        y=plot_data['CPI'],
+        y=plot_data,
         x=plot_data.index,
         name='CPI Value',
         # labels={'x': 'Timespan', 'y': 'CPI'},
@@ -309,7 +336,7 @@ def display_CPI(president):
         line=dict(color=color)
     ))
     fig.update_layout(
-        width=main_plot_width/1.75,
+        width=main_plot_width/2.2,
         height=main_plot_height/1.5,
         title=dict(
             text='CPI under President ' + president
@@ -322,8 +349,10 @@ def display_CPI(president):
         yaxis=dict(
             title=dict(
                 text='CPI'
-            )
+            ),
+            range=[plot_data.min() - 5, plot_data.min() + 60]
         ),
+
     )
     update_background(fig, color)
 
@@ -335,19 +364,19 @@ def display_CPI(president):
 )
 def display_d_CPI(president):
     time_range, color = get_presidency_and_color(president)
-    plot_data = ml_prediction.loc[time_range]
+    plot_data = ml_prediction.loc[time_range]['CPI Diff']
     fig = go.Figure()
 
     fig.add_trace(go.Scatter(
-        y=plot_data['CPI Diff'],
+        y=plot_data,
         x=plot_data.index,
         name='CPI Change Value',
         # labels={'x': 'Timespan', 'y': 'CPI'},
         mode='lines+markers',
-        line=dict(color=color)
+        line=dict(color=color),
     ))
     fig.update_layout(
-        width=main_plot_width/1.75,
+        width=main_plot_width/2.2,
         height=main_plot_height/1.5,
         title=dict(
             text='CPI monthly change under President ' + president
@@ -360,7 +389,8 @@ def display_d_CPI(president):
         yaxis=dict(
             title=dict(
                 text='CPI change'
-            )
+            ),
+            range=[-5,5]
         ),
     )
     update_background(fig, color)
@@ -386,7 +416,7 @@ def display_PPI(president):
 
     ))
     fig.update_layout(
-        width=main_plot_width / 2.5,
+        width=main_plot_width / 2.6,
         height=main_plot_height / 1.5,
         title=dict(
             text='PPI under President ' + president
@@ -426,7 +456,7 @@ def display_RPI(president):
 
     ))
     fig.update_layout(
-        width=main_plot_width / 2.5,
+        width=main_plot_width / 2.6,
         height=main_plot_height / 1.5,
         title=dict(
             text='RPI under President ' + president
@@ -466,7 +496,7 @@ def display_CE(president):
 
     ))
     fig.update_layout(
-        width=main_plot_width / 2.5,
+        width=main_plot_width / 2.6,
         height=main_plot_height / 1.5,
         title=dict(
             text='CE under President ' + president
@@ -506,7 +536,7 @@ def display_gas(president):
 
     ))
     fig.update_layout(
-        width=main_plot_width /2.5,
+        width=main_plot_width /2.4,
         height=main_plot_height / 1.5,
         title=dict(
             text='Gas Price under President ' + president
@@ -546,7 +576,7 @@ def display_gas(president):
 
     ))
     fig.update_layout(
-        width=main_plot_width / 2.5,
+        width=main_plot_width / 2.4,
         height=main_plot_height / 1.5,
         title=dict(
             text='Electricity Price under President ' + president
@@ -565,4 +595,3 @@ def display_gas(president):
     update_background(fig, color)
 
     return fig
-
