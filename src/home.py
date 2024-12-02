@@ -12,9 +12,9 @@ RED = '#E84324'
 BLUE = '#38499E'
 WHITE = '#f7f7e6'
 # Load data
-ml_prediction = pd.read_csv('Data/ML_Prediction.csv', parse_dates=['DATE'], index_col=['DATE'])
-ml_prediction['CPI Diff'] = pd.read_csv('Data/Diff_CPI.csv', parse_dates=['DATE'], index_col=['DATE'])
-other_indices = pd.read_csv('Data/mean_only_data.csv', parse_dates=['DATE'], index_col=['DATE'])
+ml_prediction = pd.read_csv('~/cs163/src/Data/ML_Prediction.csv', parse_dates=['DATE'], index_col=['DATE'])
+ml_prediction['CPI Diff'] = pd.read_csv('~/cs163/src/Data/Diff_CPI.csv', parse_dates=['DATE'], index_col=['DATE'])
+other_indices = pd.read_csv('~/cs163/src/Data/mean_only_data.csv', parse_dates=['DATE'], index_col=['DATE'])
 
 # func = assign("function() {return window.innerWidth}")
 main_plot_width = 1000

@@ -7,10 +7,10 @@ RED= '#D85840'
 CHERRY = '#5D241A'
 WHITE = '#F7F7E6'
 
-ml_prediction = pd.read_csv('Data/ML_Prediction.csv', parse_dates=['DATE'], index_col=['DATE'])
-diff_y = pd.read_csv('Data/Diff_CPI.csv', parse_dates=['DATE'], index_col=['DATE'])
-original_data = pd.read_csv('Data/final.csv', parse_dates=['DATE'], index_col=['DATE'])
-mean_only = pd.read_csv('Data/mean_only_data.csv', parse_dates=['DATE'], index_col=['DATE'])
+ml_prediction = pd.read_csv('~/cs163/src/Data/ML_Prediction.csv', parse_dates=['DATE'], index_col=['DATE'])
+diff_y = pd.read_csv('~/cs163/src/Data/Diff_CPI.csv', parse_dates=['DATE'], index_col=['DATE'])
+original_data = pd.read_csv('~/cs163/src/Data/final.csv', parse_dates=['DATE'], index_col=['DATE'])
+mean_only = pd.read_csv('~/cs163/src/Data/mean_only_data.csv', parse_dates=['DATE'], index_col=['DATE'])
 
 def update_background(fig, color):
     fig.update_layout(

@@ -9,7 +9,7 @@ RED = '#D85840'
 CHERRY = '#5D241A'
 WHITE = '#F7F7E6'
 
-ml_prediction = pd.read_csv('Data/ML_Prediction.csv', parse_dates=['DATE'], index_col=['DATE'])
+ml_prediction = pd.read_csv('~/cs163/src/Data/ML_Prediction.csv', parse_dates=['DATE'], index_col=['DATE'])
 
 
 # mean_only = pd.read_csv('Data/mean_only_data.csv', parse_dates=['DATE'], index_col=['DATE'])
