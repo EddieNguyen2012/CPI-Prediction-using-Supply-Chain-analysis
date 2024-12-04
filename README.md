@@ -10,4 +10,3 @@ Visit link for visualization, methodology and more: https://eddie2012.pythonanyw
   - [src/dash](src/webpage/) contains all files related to your webpage
   - [src/analysis](src/analysis/) contains all files related to data analysis and visualization
 - [docs](docs/) contains all documents, including proposal, analysis and visualization plans, analysis outcome presentation, and final presentation
-- [src_sample] contains sample files to test your pythonanywhere env.
